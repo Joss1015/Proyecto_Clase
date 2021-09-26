@@ -1,5 +1,7 @@
 package org.una.inventario.controllers;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,56 +14,39 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuarios")
+@Api(tags = {"Usuarios"})
 public class UsuarioController {
 
     @Autowired
     private IUsuarioService usuarioService;
 
 
+
+    @ApiOperation(value = "Obtiene una lista de todos los Usuarios", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
     @GetMapping()
     public @ResponseBody
     ResponseEntity<?> findAll() {
-        try {
-            Optional<List<UsuarioDTO>> result = usuarioService.findAll();
-            if (result.isPresent()) {
-                return new ResponseEntity<>(result, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        Optional<List<UsuarioDTO>> result = usuarioService.findAll();
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+
+    @ApiOperation(value = "Obtiene un usuario por Id", response = UsuarioDTO.class, responseContainer = "List", tags = "Usuarios")
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable(value = "id") Long id) {
-        try {
+        Optional<UsuarioDTO> usuarioFound = usuarioService.findById(id);
+        return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
 
-            Optional<UsuarioDTO> usuarioFound = usuarioService.findById(id);
-            if (usuarioFound.isPresent()) {
-                return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 
+
+
+    @ApiOperation(value = "Inicio de sesión para conseguir un token de acceso", response = UsuarioDTO.class, tags = "Seguridad")
     @PutMapping("/login")
     @ResponseBody
     public ResponseEntity<?> login(@PathVariable(value = "cedula") String cedula, @PathVariable(value = "password") String password) {
-        try {
-            UsuarioDTO usuario = new UsuarioDTO();
-            Optional<UsuarioDTO> usuarioFound = usuarioService.login(cedula, password);
-            if (usuarioFound.isPresent()) {
-                return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        Optional<UsuarioDTO> usuarioFound = usuarioService.login(cedula, password);
+        return new ResponseEntity<>(usuarioFound, HttpStatus.OK);
 
     }
 
