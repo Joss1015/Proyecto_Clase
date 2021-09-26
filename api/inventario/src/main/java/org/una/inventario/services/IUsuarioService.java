@@ -1,6 +1,7 @@
 package org.una.inventario.services;
 
 import org.una.inventario.dto.UsuarioDTO;
+import org.una.inventario.entities.Usuario;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,9 +16,13 @@ public interface IUsuarioService {
 
     public Optional<List<UsuarioDTO>> findByNombreCompletoAproximateIgnoreCase(String nombreCompleto);
 
+    public Optional<List<UsuarioDTO>>  findByDepartamentoId(Long id);
+    public Optional<UsuarioDTO> findJefeByDepartamento(Long id);
+
     public Optional<UsuarioDTO> create(UsuarioDTO usuarioDTO);
 
     public Optional<UsuarioDTO> update(UsuarioDTO usuarioDTO, Long id);
+
 
     public void delete(Long id);
 

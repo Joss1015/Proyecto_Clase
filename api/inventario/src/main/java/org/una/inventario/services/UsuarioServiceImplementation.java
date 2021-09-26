@@ -28,6 +28,22 @@ public class UsuarioServiceImplementation implements IUsuarioService {
 
     }
 
+    @Override
+    public Optional<List<UsuarioDTO>> findByDepartamentoId(Long id) {
+        List<Usuario> usuarioList = usuarioRepository.findByDepartamentoId(id);
+        List<UsuarioDTO> usuarioDTOList = MapperUtils.DtoListFromEntityList(usuarioList, UsuarioDTO.class);
+        return Optional.ofNullable(usuarioDTOList);
+    }
+
+    @Override
+    @Transactional
+    public Optional<UsuarioDTO> findJefeByDepartamento(Long id) {
+        Usuario usuario = usuarioRepository.findJefeByDepartamento(id);
+
+        UsuarioDTO usuarioDTO = MapperUtils.DtoFromEntity(usuario, UsuarioDTO.class);
+        return Optional.ofNullable(usuarioDTO);
+    }
+
     private UsuarioDTO getSavedUsuarioDTO(UsuarioDTO usuarioDTO) {
         Usuario usuario = MapperUtils.EntityFromDto(usuarioDTO, Usuario.class);
         Usuario usuarioCreated = usuarioRepository.save(usuario);
