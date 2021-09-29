@@ -12,9 +12,11 @@ public interface IDepartamentoService {
 
  public Optional<DepartamentoDTO> update(DepartamentoDTO departamentoDTO, Long id);
 
- public Optional<List<DepartamentoDTO>> findByEstado(Boolean estado);
+ public Optional<List<DepartamentoDTO>> findByEstado(boolean estado);
 
  public void delete(Long id);
+
+ public void deleteAll();
 
 
 }

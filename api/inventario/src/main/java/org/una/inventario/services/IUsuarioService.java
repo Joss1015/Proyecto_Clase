@@ -1,7 +1,7 @@
 package org.una.inventario.services;
 
 import org.una.inventario.dto.UsuarioDTO;
-import org.una.inventario.entities.Usuario;
+
 
 import java.util.List;
 import java.util.Optional;

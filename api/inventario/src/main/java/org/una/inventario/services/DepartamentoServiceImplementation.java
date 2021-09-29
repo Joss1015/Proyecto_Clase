@@ -1,6 +1,7 @@
 package org.una.inventario.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.una.inventario.dto.DepartamentoDTO;
 import org.una.inventario.entities.Departamento;
@@ -10,12 +11,13 @@ import org.una.inventario.utils.MapperUtils;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class DepartamentoServiceImplementation implements IDepartamentoService {
 
     @Autowired
     private IDepartamentoRepository departamentoRepository;
-  @Override
+
+    @Override
     @Transactional
     public Optional<DepartamentoDTO> create(DepartamentoDTO departamentoDTO) {
         return Optional.ofNullable(getSavedDepartamentoDTO(departamentoDTO));
@@ -32,7 +34,7 @@ public class DepartamentoServiceImplementation implements IDepartamentoService {
     }
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<DepartamentoDTO>> findByEstado(Boolean estado) {
+    public Optional<List<DepartamentoDTO>> findByEstado(boolean estado) {
         List<Departamento> departamento = departamentoRepository.findByEstado(estado);
 
         if (departamento.isEmpty()) throw new NotFoundInformationException();
@@ -45,6 +47,12 @@ public class DepartamentoServiceImplementation implements IDepartamentoService {
     @Override
     public void delete(Long id) {
         departamentoRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteAll() {
+        departamentoRepository.deleteAll();
     }
 
     private DepartamentoDTO getSavedDepartamentoDTO(DepartamentoDTO departamentoDTO) {
