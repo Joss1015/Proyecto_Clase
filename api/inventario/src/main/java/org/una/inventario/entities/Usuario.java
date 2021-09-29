@@ -36,6 +36,10 @@ public class Usuario implements Serializable {
     @JoinColumn(name="departamentos_id")
     private Departamento departamento;
 
+    @ManyToOne
+    @JoinColumn(name="rol_id")
+    private Rol rol;
+
 
     @Column(name = "fecha_registro", updatable = false)
     @Temporal(TemporalType.DATE)

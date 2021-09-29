@@ -11,7 +11,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class RolesDTO {
+public class RolDTO {
     private Long id;
     private String nombre;
     private Date fecha_de_creacion;

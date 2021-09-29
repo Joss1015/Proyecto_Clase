@@ -5,23 +5,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.una.inventario.dto.RolesDTO;
-import org.una.inventario.services.IRolesService;
+import org.una.inventario.dto.RolDTO;
+import org.una.inventario.services.IRolService;
 
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/roles")
 @Api(tags = {"Roles"})
-public class RolesController {
+public class RolController {
     @Autowired
-    private IRolesService rolesService;
+    private IRolService rolesService;
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/")
     @ResponseBody
-    public ResponseEntity<?> create(@RequestBody RolesDTO rolesDTO) {
+    public ResponseEntity<?> create(@RequestBody RolDTO rolDTO) {
         try {
-            Optional<RolesDTO> rolesCreated = rolesService.create(rolesDTO);
+            Optional<RolDTO> rolesCreated = rolesService.create(rolDTO);
             return new ResponseEntity<>(rolesCreated, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -30,9 +30,9 @@ public class RolesController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody RolesDTO rolesModified) {
+    public ResponseEntity<?> update(@PathVariable(value = "id") Long id, @RequestBody RolDTO rolesModified) {
         try {
-            Optional<RolesDTO> rolesUpdated = rolesService.update(rolesModified, id);
+            Optional<RolDTO> rolesUpdated = rolesService.update(rolesModified, id);
             if (rolesUpdated.isPresent()) {
                 return new ResponseEntity<>(rolesUpdated, HttpStatus.OK);
 
