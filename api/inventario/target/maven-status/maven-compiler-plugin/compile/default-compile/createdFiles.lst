@@ -1,0 +1,12 @@
+org\una\inventario\services\UsuarioServiceImplementation.class
+org\una\inventario\dto\DepartamentoDTO.class
+org\una\inventario\exceptions\InformationNotSavedException.class
+org\una\inventario\repositories\IDepartamentoRepository.class
+org\una\inventario\controllers\DepartamentoController.class
+org\una\inventario\services\DepartamentoServiceImplementation.class
+org\una\inventario\exceptions\NotImplementedException.class
+org\una\inventario\controllers\UsuarioController.class
+org\una\inventario\services\IDepartamentoService.class
+org\una\inventario\controllers\ExceptionHandlerController.class
+org\una\inventario\exceptions\MissingInputsException.class
+org\una\inventario\entities\Departamento.class
