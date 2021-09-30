@@ -21,6 +21,7 @@ public class SwaggerConfiguration {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
+                .paths(PathSelectors.regex("/.*"))
                 .apis(
                         RequestHandlerSelectors
                                 .basePackage("org.una.inventario.controllers"))
